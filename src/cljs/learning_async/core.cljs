@@ -30,10 +30,12 @@
   (go
    (show-philosopher id)
    (while true
-     (<! (timeout (rand-time 500 1000)))
      (show-thinking id)
      (<! (timeout (rand-time 500 1000)))
-     (show-eating id))))
+     (<! left) (<! right)
+     (show-eating id)
+     (<! (timeout (rand-time 500 1000)))
+     (>! left :fork) (>! right :fork))))
 
 ;;
 
