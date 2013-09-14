@@ -1,13 +1,9 @@
 # learning-core.async
 
-A Clojure library designed to ... well, that part is up to you.
-
-## Usage
-
-FIXME
+A Clojure playground project to experiment with core.async
 
 ## License
 
-Copyright © 2013 FIXME
+Copyright © 2013 Juan Manuel Gimeno Illa
 
 Distributed under the Eclipse Public License, the same as Clojure.
