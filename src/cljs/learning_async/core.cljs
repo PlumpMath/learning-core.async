@@ -29,10 +29,11 @@
 (defn philosopher [id left right]
   (go
    (show-philosopher id)
-   (<! (timeout (rand-time 500 1000)))
-   (show-thinking id)
-   (<! (timeout (rand-time 500 1000)))
-   (show-eating id)))
+   (while true
+     (<! (timeout (rand-time 500 1000)))
+     (show-thinking id)
+     (<! (timeout (rand-time 500 1000)))
+     (show-eating id))))
 
 ;;
 
