@@ -1,5 +1,7 @@
 (ns learning-async.core
-  (:require [domina :as d]))
+  (:require [domina :as d]
+            [cljs.core.async :refer [chan put! >! <! timeout]])
+  (:require-macros [cljs.core.async.macros :refer [go]]))
 
 ;; DOM
 
@@ -16,14 +18,30 @@
 
 ;;
 
-(defn philosopher [n]
-  (show-philosopher n)
-  (show-thinking n))
+(defn rand-time [a b]
+  (+ a (rand-int (- b a))))
+
+(defn make-fork []
+  (let [c (chan 1)]
+    (go (>! c :fork))
+    c))
+
+(defn philosopher [id left right]
+  (go
+   (show-philosopher id)
+   (<! (timeout (rand-time 500 1000)))
+   (show-thinking id)
+   (<! (timeout (rand-time 500 1000)))
+   (show-eating id)))
 
 ;;
 
+(def n 5)
+
+(def forks (into [] (take n (repeatedly make-fork))))
+
 (defn main []
-  (doseq [i (range 1 6)]
-    (philosopher i)))
+  (doseq [i (range n)]
+    (philosopher i (forks i) (forks (mod (inc i) n)))))
 
 (main)
