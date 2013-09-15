@@ -12,8 +12,8 @@
   :dependencies [[org.clojure/clojure "1.5.1"]
                  [compojure "1.1.5"]
 
-                 [org.clojure/clojurescript "0.0-1878"]
-                 [org.clojure/core.async "0.1.0-SNAPSHOT"]
+                 [org.clojure/clojurescript "0.0-1853"]
+                 [org.clojure/core.async "0.1.222.0-83d0c2-alpha"]
                  [domina "1.0.1"]
                  ]
   :plugins [[lein-cljsbuild "0.3.3"]
