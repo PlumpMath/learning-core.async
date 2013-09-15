@@ -13,6 +13,9 @@
                  [domina "1.0.1"]
                  ]
   :plugins [[lein-cljsbuild "0.3.3"]]
+
+  :profiles {:dev {:plugins [[com.cemerick/austin "0.1.1"]]}}
+
   :cljsbuild {:builds
               [{
                 :source-paths ["src/cljs"]
