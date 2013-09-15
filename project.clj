@@ -14,8 +14,9 @@
 
                  [org.clojure/clojurescript "0.0-1853"]
                  [org.clojure/core.async "0.1.222.0-83d0c2-alpha"]
-                 [domina "1.0.1"]
+                 [com.keminglabs/c2 "0.2.3-SNAPSHOT"]
                  ]
+
   :plugins [[lein-cljsbuild "0.3.3"]
             [lein-ring "0.8.7"]]
 

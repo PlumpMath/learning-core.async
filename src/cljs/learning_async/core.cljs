@@ -1,21 +1,37 @@
 (ns learning-async.core
-  (:require [domina :as d]
-            [cljs.core.async :refer [chan put! >! <! timeout]])
+  (:require [cljs.core.async :refer [chan put! >! <! timeout]]
+            [c2.dom :refer [append! attr select]])
+
   (:require-macros [cljs.core.async.macros :refer [go]]))
 
-;; DOM
+;;
 
-(defn show-philosopher [n]
-  (d/append! (d/by-id "body") (str "<div id='phil-" n  "'>Philosopher-" n "</div>")))
 
-(defn show-thinking [n]
-  (-> (d/by-id (str "phil-" n))
-      (d/set-classes! "thinking")))
+(def n 10)
 
-(defn show-eating [n]
-  (-> (d/by-id (str "phil-" n))
-      (d/set-classes! "eating")))
+(def height 100)
 
+(def width 500)
+
+;; SVG
+
+(defn create-svg []
+  (-> (select "#content")
+      (append! [:svg#svg {:height height :width width}])))
+
+(defn show-philosopher [id]
+  (let [w (/ width n)
+        x (* id w)]
+    (-> (select "#svg")
+        (append! [:rect {:id (str "phil-" id) :x x :y 0 :height height :width w}]))))
+
+(defn show-thinking [id]
+  (-> (select (str "#phil-" id))
+      (attr :class "thinking")))
+
+(defn show-eating [id]
+  (-> (select (str "#phil-" id))
+      (attr :class "eating")))
 ;;
 
 (defn rand-time [a b]
@@ -39,11 +55,10 @@
 
 ;;
 
-(def n 5)
-
 (def forks (into [] (take n (repeatedly make-fork))))
 
 (defn main []
+  (create-svg)
   (doseq [i (range n)]
     (philosopher i (forks i) (forks (mod (inc i) n)))))
 

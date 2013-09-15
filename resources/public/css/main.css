@@ -1,11 +1,17 @@
+rect {
+    fill: red;
+}
+
 body {
     font-size: large;
 }
 
 .eating {
     color: green;
+    fill: green;
 }
 
 .thinking {
     color: blue;
+    fill: blue;
 }
