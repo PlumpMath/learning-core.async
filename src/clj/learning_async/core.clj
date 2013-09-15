@@ -1,6 +1,11 @@
-(ns learning-core.async)
+(ns learning-async.core
+  (:require [compojure.core :refer [defroutes GET]]
+            [compojure.route :refer [resources not-found]]
+            [compojure.handler :refer [site]]))
 
-(defn foo
-  "I don't do a whole lot."
-  [x]
-  (println x "Hello, World!"))
+(defroutes app-routes
+  (GET "/" [] "<p>Hello from learning core.async</p>")
+  (resources "/")
+  (not-found "<p>Page not found</p>"))
+
+(def app (site app-routes))
